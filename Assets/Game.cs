@@ -61,7 +61,7 @@ public class Game : MonoBehaviour
 
         yield return new WaitForSeconds(0.1f);
 
-        if(chance < 0)
+        if(chance <= 0)
             aiChoice = Random.Range(0, 3);
         else
         {
@@ -73,20 +73,19 @@ public class Game : MonoBehaviour
         yield return new WaitForSeconds(2);
 
         int result = gameRelation[val, aiChoice];
-        if(result == -1)
-        {
+        if (result == -1)
             resultText.text = "Pair";
-        }
-        else if(result == val)
-        {
-            plScore++;
-            resultText.text = "Win";
-        }
         else
-        {
-            aiScore++;
-            resultText.text = "Lose";
-        }
+            if (result == val)
+            {
+                plScore++;
+                resultText.text = "Win";
+            }
+            else
+            {
+                aiScore++;
+                resultText.text = "Lose";
+            }
 
         scoreText.text = string.Format("{0}:{1}", plScore, aiScore);
         endObj.SetActive(true);
